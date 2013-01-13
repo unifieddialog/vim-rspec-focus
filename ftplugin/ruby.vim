@@ -1,5 +1,5 @@
 function! RemoveAllFocusTags()
-  " Sace cursor position
+  " Save cursor position
   let l = line(".")
   let c = col(".")
   %s/, :focus//e
