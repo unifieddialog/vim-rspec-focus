@@ -1,4 +1,4 @@
-function! RemoveAllFocusTags()
+function! s:RemoveAllFocusTags()
   " Save cursor position
   let l = line(".")
   let c = col(".")
@@ -6,4 +6,8 @@ function! RemoveAllFocusTags()
   call cursor(l, c)
 endfunction
 
-:nnoremap <leader>r :call RemoveAllFocusTags()<CR>
+" Commands
+command! -nargs=0 RemoveAllFocusTags call s:RemoveAllFocusTags()
+
+" Mappings
+:nnoremap <leader>r :RemoveAllFocusTags<CR>
