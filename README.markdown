@@ -12,7 +12,3 @@ There are currently two commands:
 ## Installation
 
 Use [pathogen.vim](https://github.com/tpope/vim-pathogen)
-
-## License
-
-Don't know
