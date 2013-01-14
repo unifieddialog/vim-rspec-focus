@@ -1,5 +1,6 @@
 function! s:AddFocusTag()
   execute "normal! ? do\<cr>C, :focus do\<esc>"
+  normal! ``
 endfunction
 
 function! s:RemoveAllFocusTags()
