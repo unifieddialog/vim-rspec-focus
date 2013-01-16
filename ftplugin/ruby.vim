@@ -13,7 +13,7 @@ function! s:Preserve(command)
 endfunction
 
 function! s:AddFocusTag()
-  call s:Preservce("normal! ? do\<cr>C, :focus do\<esc>")
+  call s:Preserve("normal! ? do\<cr>C, :focus do\<esc>")
 endfunction
 
 function! s:RemoveAllFocusTags()
