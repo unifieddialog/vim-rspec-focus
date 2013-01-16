@@ -1,27 +1,23 @@
-function! s:AddFocusTag()
+function! s:Preserve(command)
   " Save last search and cursor position
   let _s=@/
   let l = line(".")
   let c = col(".")
 
-  execute "normal! ? do\<cr>C, :focus do\<esc>"
-  "
+  " Do the business
+  execute a:command
+
   " Restore previous search history and cursor position
   let @/=_s
   call cursor(l, c)
 endfunction
 
+function! s:AddFocusTag()
+  call s:Preservce("normal! ? do\<cr>C, :focus do\<esc>")
+endfunction
+
 function! s:RemoveAllFocusTags()
-  " Save last search and cursor position
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-
-  %s/, :focus//e
-
-  " Restore previous search history and cursor position
-  let @/=_s
-  call cursor(l, c)
+  call s:Preserve("%s/, :focus//e")
 endfunction
 
 " Commands
