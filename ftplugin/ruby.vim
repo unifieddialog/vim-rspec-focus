@@ -11,8 +11,6 @@ function! s:Preserve(command)
   " Remove search history pollution and restore last search
   call histdel("search", -1)
   let @/ = histget("search", -1)
-
-  " superfluous comment :-)
 endfunction
 
 function! s:AddFocusTag()
