@@ -1,7 +1,7 @@
 rspec-focus.vim
 ===============
 
-Some helpers for focused rspecs testruns.
+Some helpers for focused RSpec testruns. See this [Railscast](http://railscasts.com/episodes/285-spork) for more information.
 
 ## Usage
 
