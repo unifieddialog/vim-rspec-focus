@@ -24,7 +24,3 @@ endfunction
 " Commands
 command! -nargs=0 AddFocusTag call s:AddFocusTag()
 command! -nargs=0 RemoveAllFocusTags call s:RemoveAllFocusTags()
-
-" Mappings
-:nnoremap <leader>t :AddFocusTag<CR>
-:nnoremap <leader>r :RemoveAllFocusTags<CR>
