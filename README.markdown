@@ -12,3 +12,10 @@ There are currently two commands:
 ## Installation
 
 Use [pathogen.vim](https://github.com/tpope/vim-pathogen)
+
+### Key bindings
+To make it more convenient, add some key bindings to your `.vimrc`:
+
+    " vim-rspec-focus
+    :nnoremap <leader>t :AddFocusTag<CR>
+    :nnoremap <leader>r :RemoveAllFocusTags<CR>
