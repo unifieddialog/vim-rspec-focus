@@ -14,7 +14,7 @@ function! s:Preserve(command)
 endfunction
 
 function! s:AddFocusTag()
-  call s:Preserve("normal! ? do\<cr>C, :focus do\<esc>")
+  call s:Preserve("normal! ?\\(describe\\|it\\|context\\|scenario\\|feature\\|specify\\)\\s\\+['\"].*['\"]\\s\\+do\<cr>$bhi, :focus\<esc>")
 endfunction
 
 function! s:RemoveAllFocusTags()
