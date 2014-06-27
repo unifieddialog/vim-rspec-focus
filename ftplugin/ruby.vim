@@ -30,7 +30,7 @@ fun! s:ToggleFocusTag(...)
     let pattern = s:focusablesPattern
   endif
   let match = search(pattern, 'bcWn')
-  :let line = getline(match)
+  let line = getline(match)
 
   if s:LineHasFocusTag(line)
     call s:RemoveFocusTag(pattern)
@@ -42,36 +42,36 @@ endfun
 
 fun! s:AddFocusTag(pattern)
   let match = search(a:pattern, 'bcWn')
-  :let line = getline(match)
+  let line = getline(match)
   if s:LineHasFocusTag(line)
   else
     " is this is a single-line assertion w/ no description?
     let singleLineAssertionPattern = 'it { '
     if match(line, singleLineAssertionPattern) >= 0
-      :let patternToReplace = singleLineAssertionPattern
-      :let replacement = 'it "", { focus: true } { '
+      let patternToReplace = singleLineAssertionPattern
+      let replacement = 'it "", { focus: true } { '
     else
-      :let patternToReplace = ' do$'
-      :let replacement = ", focus: true do"
+      let patternToReplace = ' do$'
+      let replacement = ", focus: true do"
     endif
-    :let repl = substitute(line, patternToReplace, replacement, "")
-    :call setline(match, repl)
+    let repl = substitute(line, patternToReplace, replacement, "")
+    call setline(match, repl)
   endif
 endfun
 
 fun! s:RemoveFocusTag(pattern)
   let match = search(a:pattern, 'bcWn')
-  :let line = getline(match)
+  let line = getline(match)
   if s:LineHasFocusTag(line)
     " is this is a focused single-line assertion w/ no description?
     let focusedSingleLineAssertionPattern = '"", { focus: true } '
     if match(line, focusedSingleLineAssertionPattern) >= 0
-      :let patternToReplace = focusedSingleLineAssertionPattern
+      let patternToReplace = focusedSingleLineAssertionPattern
     else
-      :let patternToReplace = ', focus: true'
+      let patternToReplace = ', focus: true'
     endif
-    :let repl = substitute(line, patternToReplace, "", "g")
-    :call setline(match, repl)
+    let repl = substitute(line, patternToReplace, "", "g")
+    call setline(match, repl)
   endif
 endfun
 
