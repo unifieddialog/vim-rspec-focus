@@ -20,12 +20,16 @@ fun! s:LineHasFocusTag(line)
 endfun
 
 fun! s:ToggleFocusTag(...)
+  let l = line(".")
+  let c = col(".")
+  execute "silent normal! $"
+
   if a:0 > 0
     let pattern = a:1
   else
     let pattern = s:focusablesPattern
   endif
-  let match = search(pattern, 'bWn')
+  let match = search(pattern, 'bcWn')
   :let line = getline(match)
 
   if s:LineHasFocusTag(line)
@@ -33,31 +37,40 @@ fun! s:ToggleFocusTag(...)
   else
     call s:AddFocusTag(pattern)
   endif
+  call cursor(l, c)
 endfun
 
 fun! s:AddFocusTag(pattern)
-  let match = search(a:pattern, 'bWn')
+  let match = search(a:pattern, 'bcWn')
   :let line = getline(match)
   if s:LineHasFocusTag(line)
   else
-    if match(line, "it { ") >= 0
-      :let repl = substitute(line, 'it { ', 'it "", { focus: true } { ', "")
+    " is this is a single-line assertion w/ no description?
+    let singleLineAssertionPattern = 'it { '
+    if match(line, singleLineAssertionPattern) >= 0
+      :let patternToReplace = singleLineAssertionPattern
+      :let replacement = 'it "", { focus: true } { '
     else
-      :let repl = substitute(line, ' do$', ", focus: true do", "")
+      :let patternToReplace = ' do$'
+      :let replacement = ", focus: true do"
     endif
+    :let repl = substitute(line, patternToReplace, replacement, "")
     :call setline(match, repl)
   endif
 endfun
 
 fun! s:RemoveFocusTag(pattern)
-  let match = search(a:pattern, 'bWn')
+  let match = search(a:pattern, 'bcWn')
   :let line = getline(match)
   if s:LineHasFocusTag(line)
-    if match(line, '"", { focus: true } ') >= 0
-      :let repl = substitute(line, '"", { focus: true } ', "", "g")
+    " is this is a focused single-line assertion w/ no description?
+    let focusedSingleLineAssertionPattern = '"", { focus: true } '
+    if match(line, focusedSingleLineAssertionPattern) >= 0
+      :let patternToReplace = focusedSingleLineAssertionPattern
     else
-      :let repl = substitute(line, ', focus: true', "", "g")
+      :let patternToReplace = ', focus: true'
     endif
+    :let repl = substitute(line, patternToReplace, "", "g")
     :call setline(match, repl)
   endif
 endfun
