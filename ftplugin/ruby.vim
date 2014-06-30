@@ -51,7 +51,7 @@ fun! s:AddFocusTag(pattern)
       let patternToReplace = singleLineAssertionPattern
       let replacement = 'it "", { focus: true } { '
     else
-      let patternToReplace = ' do$'
+      let patternToReplace = ' do\s*$'
       let replacement = ", focus: true do"
     endif
     let repl = substitute(line, patternToReplace, replacement, "")
