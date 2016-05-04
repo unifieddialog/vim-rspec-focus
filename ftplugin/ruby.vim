@@ -14,7 +14,7 @@ function! s:Preserve(command)
 endfunction
 
 function! s:AddFocusTag()
-  call s:Preserve("normal! ? do\<cr>C, :focus do\<esc>")
+  call s:Preserve("normal! ?\\(^\\s*\\(expect\\|before\\|after\\|let\\).*\\)\\@<! do\<cr>C, :focus do\<esc>")
 endfunction
 
 function! s:RemoveAllFocusTags()
